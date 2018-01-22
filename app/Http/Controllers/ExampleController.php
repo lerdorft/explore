@@ -38,8 +38,8 @@ class ExampleController extends Controller
      */
     public function test(Request $request)
     {
-        $this->exampleRepository->test($request->all());
+        $response = $this->exampleRepository->test($request->all());
 
-        return $this->formatJsonOutput(['test' => 'hello world']);
+        return $this->formatJsonOutput($response);
     }
 }

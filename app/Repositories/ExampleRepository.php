@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Cache;
 
 class ExampleRepository
 {
+    const CACHE_COOKIE = 'cache_cookie';
+
     /**
      * just for testing
      *
@@ -20,6 +22,13 @@ class ExampleRepository
      */
     public function test($params)
     {
-        return [];
+        //Cache::forget(self::CACHE_COOKIE);
+        //Cache::flush();
+
+        if (array_get($params, 'cookie')) {
+            Cache::forever(self::CACHE_COOKIE, $params['cookie']);
+        }
+
+        return Cache::get(self::CACHE_COOKIE, 'nothing');
     }
 }
